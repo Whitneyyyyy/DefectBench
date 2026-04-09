@@ -33,6 +33,8 @@ DefectBench is constructed through a **human-in-the-loop semi-automated annotati
 
 ---
 
+![alt text](assets/fig.s1.jpg)
+
 ## Defect Taxonomy
 
 DefectBench defines a standardized, two-level taxonomy:
