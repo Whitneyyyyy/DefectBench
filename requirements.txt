@@ -1,0 +1,21 @@
+numpy
+pandas
+opencv-python
+Pillow
+matplotlib
+Flask
+requests
+
+torch
+torchvision
+ultralytics
+transformers
+huggingface_hub
+timm
+
+openai
+dashscope
+volcengine-python-sdk
+
+# OpenAI CLIP package used by `import clip`
+git+https://github.com/openai/CLIP.git

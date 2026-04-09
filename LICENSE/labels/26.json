@@ -1,0 +1,57 @@
+{
+  "image_path": "hk2926.jpg",
+  "bboxes": [
+    {
+      "instance_id": "hk2926_0",
+      "taxonomy": {
+        "primary_class": "Crack",
+        "sub_type": "Linear crack"
+      },
+      "bbox": [
+        2481.0,
+        1487.0,
+        862.9999999999999,
+        1044.0
+      ]
+    },
+    {
+      "instance_id": "hk2926_1",
+      "taxonomy": {
+        "primary_class": "Crack",
+        "sub_type": "Linear crack"
+      },
+      "bbox": [
+        915.0,
+        1612.0,
+        337.00000000000006,
+        611.0
+      ]
+    },
+    {
+      "instance_id": "hk2926_2",
+      "taxonomy": {
+        "primary_class": "Crack",
+        "sub_type": "Linear crack"
+      },
+      "bbox": [
+        1544.6429393744907,
+        1237.7355936436566,
+        226.94478527607362,
+        680.8343558282209
+      ]
+    },
+    {
+      "instance_id": "hk2926_3",
+      "taxonomy": {
+        "primary_class": "Crack",
+        "sub_type": "Linear crack"
+      },
+      "bbox": [
+        1729.0355774113004,
+        2606.4963298399757,
+        2879.361963190184,
+        191.4846625766868
+      ]
+    }
+  ]
+}

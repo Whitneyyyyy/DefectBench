@@ -1,0 +1,44 @@
+{
+  "image_path": "549.png",
+  "bboxes": [
+    {
+      "instance_id": "s2ds_train_549_Spalling_2",
+      "taxonomy": {
+        "primary_class": "Material_loss",
+        "sub_type": "Spalling"
+      },
+      "bbox": [
+        410.0,
+        0.0,
+        201.0,
+        386.0
+      ]
+    },
+    {
+      "instance_id": "s2ds_train_549_Spalling_0",
+      "taxonomy": {
+        "primary_class": "Material_loss",
+        "sub_type": "Spalling"
+      },
+      "bbox": [
+        541.0,
+        438.0,
+        118.0,
+        202.0
+      ]
+    },
+    {
+      "instance_id": "s2ds_train_549_Corrosion_0",
+      "taxonomy": {
+        "primary_class": "Stain",
+        "sub_type": "Corrosion"
+      },
+      "bbox": [
+        271.0,
+        0.0,
+        468.0,
+        703.0
+      ]
+    }
+  ]
+}

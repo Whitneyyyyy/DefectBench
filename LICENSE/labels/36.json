@@ -1,0 +1,31 @@
+{
+  "image_path": "hk4039.jpg",
+  "bboxes": [
+    {
+      "instance_id": "hk4039_0",
+      "taxonomy": {
+        "primary_class": "Crack",
+        "sub_type": "Linear crack"
+      },
+      "bbox": [
+        2069.452755325411,
+        1488.7932731768835,
+        1567.3374233128834,
+        964.515337423313
+      ]
+    },
+    {
+      "instance_id": "hk4039_1",
+      "taxonomy": {
+        "primary_class": "Crack",
+        "sub_type": "Linear crack"
+      },
+      "bbox": [
+        587.2196264910551,
+        630.6583038517302,
+        1517.6932515337423,
+        503.5337423312884
+      ]
+    }
+  ]
+}

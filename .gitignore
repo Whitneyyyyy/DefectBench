@@ -1,0 +1,20 @@
+# Python 缓存
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 虚拟环境
+.venv/
+venv/
+env/
+
+# IDE 配置
+.idea/
+.vscode/
+
+# 项目产生的数据和模型权重 (根据你的实际情况修改)
+data_sample/images/
+data_sample/labels/
+data_sample/masks/
+model_weights/
+results/
