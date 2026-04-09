@@ -33,7 +33,8 @@ DefectBench is constructed through a **human-in-the-loop semi-automated annotati
 
 ---
 
-![alt text](./assets/annotation-demo.mp4)
+![alt text](./assets/annotation-demo.gif)
+
 
 ## Defect Taxonomy
 
