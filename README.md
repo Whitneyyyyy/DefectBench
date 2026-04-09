@@ -90,6 +90,9 @@ export VLM_MODEL_NAME="model-name"
 
 ```text
 DefectBench/
+├── assets/
+│   ├── framework_overview.jpg
+│   ├── annotation_demo.mp4
 ├── annotation_toolkit/
 │   ├── annotation.py
 │   ├── backend/
