@@ -53,43 +53,47 @@ DefectBench defines a standardized, two-level taxonomy:
 
 ---
 
-## Directory Structure
+### Directory Overview
 
-```
+```text
 DefectBench/
-├── final_dataset/                  # Full dataset (1,485 samples)
-│   ├── images/                     # Facade images
-│   │   ├── 003.png
-│   │   ├── 007.png
-│   │   └── ...
-│   ├── labels/                     # JSON annotations (bbox + taxonomy)
-│   │   ├── 003.json
-│   │   ├── 007.json
-│   │   └── ...
-│   └── masks/                      # Binary segmentation masks
-│       ├── 003_mask.png
-│       ├── 007_mask.png
-│       └── ...
-│
-├── test_100/                       # 100-image evaluation subset
-│   ├── images/
-│   ├── labels/
-│   ├── masks/
-│   ├── Crack/                      # Category-wise organized
-│   ├── Material_loss/
-│   ├── Stain/
-│   └── External_Fixings/
-│
-├── Visualization_selected_100/     # Visualization outputs
+├── annotation_toolkit/
+│   ├── annotation.py
+│   ├── backend/
+│   │   ├── annotate_images_to_candidates.py
+│   │   ├── detection_agent.py
+│   │   ├── sam_logic.py
+│   │   └── crack_service.py
+│   ├── frontend/
+│   ├── sample_pipeline/
+│   │   ├── filter_and_classify_images.py
+│   │   └── analyze_image_distributions.py
+│   └── src/final_dataset/
+├── benchmark_evaluation/
+│   ├── vlm_generation/
+│   │   ├── generate_visualization.py
+│   │   ├── generate_qa_ground_truth.py
+│   │   ├── topology_qa_gt.py
+│   │   ├── vlm_generate_qa.py
+│   │   ├── vlm_generate_qa_openai.py
+│   │   ├── vlm_topology_qa.py
+│   │   ├── vlm_topology_qa_openai.py
+│   │   └── vlm_extract_mask*.py
+│   └── vlm_evaluation/
+│       ├── evaluate_vlm_qa.py
+│       ├── evaluate_segmentation.py
+│       ├── evaluate_q4_metrics.py
+│       └── evaluate_bbox_metrics.py
+├── preprocess_raw_dataset/
+│   ├── unify_bbox_labels.py
+│   └── unify_mask.py
+├── data_sample/
 │   ├── images/
 │   ├── labels/
 │   └── masks/
-│
-├── README.md
-└── DATASET.md                      # This file
+├── model_weights/
+└── core/
 ```
-
----
 
 ## Annotation Format
 
@@ -198,50 +202,73 @@ DefectBench defines 5 hierarchical tasks (Q1–Q5) across 3 cognitive levels:
 
 ### Level 1: Semantic Perception ("What")
 
-**Q1 — Defect Identification**
+**Q1 — Defect Identification** & **Q2 — Defect Counting**
 
 ```
-You are an expert in building defect analysis. You will see one image.
-Your task is to answer two questions about visible defects in this image.
-
-Only consider the following four primary defect types, and use exactly
-these English names: Crack; material_loss; Stain; External Fixings.
-
-Return your answers strictly as a single JSON object:
-{"answer1": "...", "answer2": "..."}
+       "You are an expert in building defect analysis. You will see one image.\n"
+        "Your task is to answer TWO questions about visible defects in this image.\n\n"
+        "Only consider these four primary defect types, and use EXACTLY these English names in your answers:\n\n"
+        "1. Crack: Any type of crack or fissure in the building surface, including:\n"
+        "2. material_loss: Loss of material from the building surface, including:\n"
+        "   - peeling, spalling, flakes, peeling_paint, Abscission, Bulge\n"
+        "3. Stain: Discoloration or staining on the building surface, including:\n"
+        "   - algae, stain, biological_deteriorations, mold, water_seepage, Dampness, Efflorescence, Leakage, Corrosion, chemical_deteriorations\n"
+        "4. External Fixings: External objects or human-made additions on the building surface, including:\n"
+        "   - human_caused_damages (such as graffiti, vandalism, or other human-made marks)\n"
+        "   - Vegetation (plants, moss, or other vegetation growing on the surface)\n\n"
+        "The two questions are:\n"
+        "1. What defects are in the image? (list defect types, separated by comma)\n"
+        "2. How many instances of each defect type? (follow the same order as in Q1, give counts separated by comma)\n\n"
+        "Return your answers STRICTLY as a single JSON object with exactly these keys:\n"
+        "  {\n"
+        "    \"answer1\": \"...\",  // Answer to question 1 (defect types)\n"
+        "    \"answer2\": \"...\"   // Answer to question 2 (counts)\n"
+        "  }\n"
+        "Do NOT add any extra commentary, explanations, or markdown outside of this JSON.\n"
+        "The JSON must be valid and parseable by Python json.loads.\n"
+    
 ```
 
-**Q2 — Defect Counting**
-
-```
-Based on the identified defect types, report the number of instances
-for each defect class. Counts must follow the same order as in Q1
-and be separated by commas.
-```
 
 ### Level 2: Spatial Localization ("Where")
 
 **Q3 — Object Detection**
 
 ```
-Detect bounding boxes for each defect instance identified previously.
-Each object must be returned with its category and bounding box in
-the format: bbox: "<x_min y_min x_max y_max>".
-
-Return only a JSON array:
-[{"category": "...", "bbox": "..."}]
-Use exactly the category names: Crack, material_loss, Stain, External Fixings.
+ "Based on your previous analysis, you identified these defects: {answer1}\n"
+        f"And the counts are: {answer2}\n\n"
+        "Now, please detect the bounding boxes for each defect instance you identified.\n"
+        "For each detected object, return its category and bounding box.\n"
+        f"The bounding box must be written as \"bbox\": \"{BBOX_TAG_START}x_min y_min x_max y_max{BBOX_TAG_END}\".\n"
+        "Use EXACTLY these category names: Crack, material_loss, Stain, External Fixings\n"
+        "Return ONLY a JSON array like:\n"
+        f"[{{\"category\": \"Crack\", \"bbox\": \"{BBOX_TAG_START}x1 y1 x2 y2{BBOX_TAG_END}\"}}, "
+        f"{{\"category\": \"material_loss\", \"bbox\": \"{BBOX_TAG_START}x3 y3 x4 y4{BBOX_TAG_END}\"}}]"
 ```
 
 **Q4 — Visual Spatial Reasoning**
 
 ```
-Analyze spatial relationships between all pairs of detected defects.
-Possible relations include: inclusion, overlapping, adjacency, and disjoint.
+"Based on your previous analysis, you identified these defects: {defects_list}\n\n"
+        "Now, analyze the spatial relationships between all pairs of defects in the image.\n\n"
+        "Relationship types:\n"
+        "- inclusion: one defect is completely within another defect's boundaries\n"
+        "- overlapping: two different types of defects partially overlap in space\n"
+        "- adjacency: two defects' boundaries are in contact or very close (within ~10 pixels) but do not overlap\n"
+        "- disjoint: defects have no spatial intersection or contact\n\n"
+        "For each pair of defects (i, j) where i < j, determine their relationship.\n"
+        "Return your answer as a JSON object with a list of relationships:\n"
+        "  {\n"
+        "    \"relationships\": [\n"
+        "      [\"1#Crack\", \"adjacency\", \"2#material_loss\"],\n"
+        "      [\"1#Crack\", \"overlapping\", \"3#Stain\"]\n"
+        "    ]\n"
+        "  }\n"
+        "Format: [\"{number}#{type}\", \"{relation}\", \"{number}#{type}\"]\n"
+        "Use EXACTLY these relation names: inclusion, overlapping, adjacency, disjoint\n"
+        "Do NOT add any extra commentary, explanations, or markdown outside of this JSON.\n"
+        "The JSON must be valid and parseable by Python json.loads.\n"
 
-Return a JSON object with the structure:
-{"relationships": [[i#type, relation, j#type]]}
-The output must be valid JSON without any additional text.
 ```
 
 ### Level 3: Generative Geometry Segmentation ("How")
@@ -249,8 +276,24 @@ The output must be valid JSON without any additional text.
 **Q5 — Geometry Segmentation**
 
 ```
-Edit the input image directly to generate a binary segmentation mask
-for all identified defects.
+f"You will be given an image of defects on a building surface with numbered bounding boxes and labels.\n"
+        f"Your task is to **edit the input image directly** by painting black and white to create a **binary segmentation mask** for **{primary_class} only**.\n\n"
+        f"**Definition of {primary_class}:**\n"
+        f"{class_def}\n\n"
+        f"CRITICAL Requirements:\n"
+        f"1. **Edit the input image directly** - Do NOT generate a new image. Start from the input image and modify it by painting:\n"
+        f"   - Paint defect pixels (belonging to **{primary_class}**): use white (255)\n"
+        f"   - Paint all other pixels (background, non-{primary_class} areas): use black (0)\n"
+        f"2. **Remove ALL annotations** - You MUST paint over and remove:\n"
+        f"   - All bounding boxes (rectangles)\n"
+        f"   - All labels and text (like \"1#Crack\", \"2#Material_loss\", etc.)\n"
+        f"   - All numbers and annotations\n"
+        f"   - Paint all of these as black (0) - they should NOT appear in the final mask\n"
+        f"3. **Keep the exact same dimensions** - The output must have exactly the same width and height as the input image. Do not change the aspect ratio, make it square, or add any borders.\n"
+        f"4. **Maintain the same composition** - Do not change the camera viewpoint, scaling, or crop.\n"
+        f"5. Focus on the areas within the bounding boxes labeled with \"{primary_class}\" in the image, but extract ONLY the actual defect pixels. Do NOT include the bounding boxes, labels, numbers, or any text in the mask.\n\n"
+        f"Output the edited input image as a pure binary mask: white pixels ONLY for **{primary_class}** defect regions, black pixels for everything else (including all annotations, boxes, labels, and text), with the exact same dimensions as the input image."
+    
 ```
 
 ---
@@ -263,7 +306,7 @@ for all identified defects.
 | L1 | Q2: Counting | MAE, RE | Mean Absolute Error and Relative Error per category |
 | L2 | Q3: Detection | P, R, F1 | IoU-thresholded bounding box evaluation |
 | L2 | Q4: Spatial Reasoning | P, R, F1 | Relation triplet matching accuracy |
-| L3 | Q5: Segmentation | IoU, Dice, mIoU | Pixel-level mask quality metrics |
+| L3 | Q5: Segmentation | mIoU, P, R, F1, AP | Pixel-level mask quality metrics |
 
 ---
 

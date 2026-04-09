@@ -33,63 +33,102 @@
 
 **1,488 images | 4,527 instances | 4 primary classes | 10 sub-types**
 
-| Primary Class | Sub-types | Instances |
+| Primary Class | Sub-type | Instances |
 |---|---|---:|
-| Crack | Linear crack, Map cracking | 2,122 |
-| Material Loss | Spalling, Peeling | 957 |
-| Surface Stain | Corrosion, Rust stain, Leakage stain | 1,078 |
-| External Fixings | Vegetation, Graffiti, Contaminants | 370 |
+| **Crack** | Linear crack | 2,042 |
+| | Map cracking | 80 |
+| **Material Loss** | Spalling | 906 |
+| | Peeling | 51 |
+| **Surface Stain** | Corrosion | 254 |
+| | Rust stain | 21 |
+| | Leakage stain | 803 |
+| **External Fixings** | Vegetation growth | 221 |
+| | Graffiti | 30 |
+| | Surface contaminants | 119 |
+
+**Total: 4,527 defect instances across 1,488 images**
 
 > For detailed data format, annotation schema, and source dataset mapping, see **[DATASET.md](DATASET.md)**.
 
-## Quick Start
+## Getting Started
 
-### Download
+### Installation
 
 ```bash
-# Clone the repository
 git clone https://github.com/<your-username>/DefectBench.git
-cd DefectBench
+cd defect_bench
+python -m venv .venv
+source .venv/bin/activate   # Linux/macOS
+# .venv\Scripts\activate    # Windows
+pip install -r requirements.txt
+export PYTHONPATH=.
 ```
 
-### Data Structure
+### Environment Variables
 
+Set required API keys (**never hardcode**):
+
+```bash
+export OPENAI_API_KEY="your-key"
+export ARK_API_KEY="your-key"
+export DASHSCOPE_API_KEY="your-key"
+# Optional:
+export VLM_MODEL_NAME="model-name"
 ```
+
+### Data & Output Conventions
+
+| Path | Description |
+|---|---|
+| `data_sample/images/` | Input facade images |
+| `data_sample/labels/` | Bounding box + taxonomy annotations (JSON) |
+| `data_sample/masks/` | Binary segmentation ground truth masks |
+| `results/` | All generated outputs |
+
+## Repository Structure
+
+
+```text
 DefectBench/
-├── final_dataset/
-│   ├── images/          # 1,485 facade images (.png)
-│   ├── labels/          # Bounding box + taxonomy annotations (.json)
-│   └── masks/           # Binary segmentation masks (.png)
-├── test_100/            # 100-image evaluation subset
+├── annotation_toolkit/
+│   ├── annotation.py
+│   ├── backend/
+│   │   ├── annotate_images_to_candidates.py
+│   │   ├── detection_agent.py
+│   │   ├── sam_logic.py
+│   │   └── crack_service.py
+│   ├── frontend/
+│   ├── sample_pipeline/
+│   │   ├── filter_and_classify_images.py
+│   │   └── analyze_image_distributions.py
+│   └── src/final_dataset/
+├── benchmark_evaluation/
+│   ├── vlm_generation/
+│   │   ├── generate_visualization.py
+│   │   ├── generate_qa_ground_truth.py
+│   │   ├── topology_qa_gt.py
+│   │   ├── vlm_generate_qa.py
+│   │   ├── vlm_generate_qa_openai.py
+│   │   ├── vlm_topology_qa.py
+│   │   ├── vlm_topology_qa_openai.py
+│   │   └── vlm_extract_mask*.py
+│   └── vlm_evaluation/
+│       ├── evaluate_vlm_qa.py
+│       ├── evaluate_segmentation.py
+│       ├── evaluate_q4_metrics.py
+│       └── evaluate_bbox_metrics.py
+├── preprocess_raw_dataset/
+│   ├── unify_bbox_labels.py
+│   └── unify_mask.py
+├── data_sample/
 │   ├── images/
 │   ├── labels/
-│   ├── masks/
-│   └── Crack/ Material_loss/ Stain/ External_Fixings/
-├── README.md
-└── DATASET.md
+│   └── masks/
+├── model_weights/
+└── core/
 ```
 
-### Load Data (Python)
 
-```python
-import json
-from PIL import Image
-
-# Load an image and its annotation
-image = Image.open("final_dataset/images/003.png")
-with open("final_dataset/labels/003.json") as f:
-    annotation = json.load(f)
-
-# Access defect instances
-for bbox_info in annotation["bboxes"]:
-    print(f"[{bbox_info['instance_id']}] "
-          f"{bbox_info['taxonomy']['primary_class']} - "
-          f"{bbox_info['taxonomy']['sub_type']}")
-    print(f"  bbox: {bbox_info['bbox']}")
-
-# Load corresponding mask
-mask = Image.open("final_dataset/masks/003_mask.png")
-```
 
 ## Evaluated Models
 
@@ -122,7 +161,7 @@ mask = Image.open("final_dataset/masks/003_mask.png")
 | L1 | Counting (Q2) | MAE, Relative Error |
 | L2 | Detection (Q3) | Precision, Recall, F1 |
 | L2 | Spatial Reasoning (Q4) | Precision, Recall, F1 |
-| L3 | Segmentation (Q5) | IoU, Dice, mIoU |
+| L3 | Segmentation (Q5) | mIoU, Precision, Recall, F1, PA |
 
 ## Citation
 
@@ -130,7 +169,7 @@ mask = Image.open("final_dataset/masks/003_mask.png")
 @article{zhong2025defectbench,
   title={Can Large Multimodal Models Inspect Buildings? A Hierarchical Benchmark for Structural Pathology Reasoning},
   author={Zhong, Hui and Gao, Yichun and Liu, Luyan and Yang, Hai and Wang, Wang and Zhang, Haowei and Zheng, Xinhu},
-  journal={arXiv preprint arXiv:2603.20148},
+  journal={arXiv preprint arXiv preprint arXiv:2603.20148},
   year={2025}
 }
 ```
