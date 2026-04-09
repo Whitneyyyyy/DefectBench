@@ -93,6 +93,7 @@ DefectBench/
 ├── assets/
 │   ├── framework_overview.jpg
 │   ├── annotation_demo.mp4
+│   ├── annotation_demo.gif
 ├── annotation_toolkit/
 │   ├── annotation.py
 │   ├── backend/
