@@ -1,0 +1,18 @@
+{
+  "image_path": "sp_000056.jpg",
+  "bboxes": [
+    {
+      "instance_id": "DJI_20240521090024_0110_V_6_Vegeterian_0",
+      "taxonomy": {
+        "primary_class": "External Fixings",
+        "sub_type": "Vegetation growth"
+      },
+      "bbox": [
+        133.16819763183594,
+        444.4768371582031,
+        266.39622497558594,
+        379.1194152832031
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "image_path": "11289-6.jpg",
+  "bboxes": [
+    {
+      "instance_id": "deepcarck_test_11289-6_0",
+      "taxonomy": {
+        "primary_class": "Crack",
+        "sub_type": "Linear crack"
+      },
+      "bbox": [
+        53,
+        0,
+        490,
+        384
+      ]
+    }
+  ]
+}

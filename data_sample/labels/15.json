@@ -1,0 +1,31 @@
+{
+  "image_path": "hk1157.jpg",
+  "bboxes": [
+    {
+      "instance_id": "hk1157_0",
+      "taxonomy": {
+        "primary_class": "Crack",
+        "sub_type": "Linear crack"
+      },
+      "bbox": [
+        1119.0,
+        2243.0,
+        428.0,
+        1228.0
+      ]
+    },
+    {
+      "instance_id": "hk1157_1",
+      "taxonomy": {
+        "primary_class": "Crack",
+        "sub_type": "Linear crack"
+      },
+      "bbox": [
+        1483.628115765583,
+        589.0094709017018,
+        212.5976862345599,
+        1615.7424153826541
+      ]
+    }
+  ]
+}

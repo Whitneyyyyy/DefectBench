@@ -1,0 +1,18 @@
+{
+  "image_path": "hk3134.jpg",
+  "bboxes": [
+    {
+      "instance_id": "hk3134_0",
+      "taxonomy": {
+        "primary_class": "Crack",
+        "sub_type": "Linear crack"
+      },
+      "bbox": [
+        1863.0000000000002,
+        2271.0,
+        2332.9999999999995,
+        467.0
+      ]
+    }
+  ]
+}

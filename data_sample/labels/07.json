@@ -1,0 +1,83 @@
+{
+  "image_path": "637.png",
+  "bboxes": [
+    {
+      "instance_id": "637_0",
+      "taxonomy": {
+        "primary_class": "Stain",
+        "sub_type": "Corrosion"
+      },
+      "bbox": [
+        180,
+        131,
+        50.59999999999991,
+        64.38666666666666
+      ]
+    },
+    {
+      "instance_id": "637_1",
+      "taxonomy": {
+        "primary_class": "Stain",
+        "sub_type": "Corrosion"
+      },
+      "bbox": [
+        133,
+        328.23999999999995,
+        232.92000000000002,
+        343.58666666666676
+      ]
+    },
+    {
+      "instance_id": "637_2",
+      "taxonomy": {
+        "primary_class": "Material_loss",
+        "sub_type": "Spalling"
+      },
+      "bbox": [
+        27,
+        317,
+        404,
+        400
+      ]
+    },
+    {
+      "instance_id": "637_3",
+      "taxonomy": {
+        "primary_class": "Material_loss",
+        "sub_type": "Spalling"
+      },
+      "bbox": [
+        693.2933333333333,
+        416.1733333333334,
+        310,
+        601
+      ]
+    },
+    {
+      "instance_id": "637_4",
+      "taxonomy": {
+        "primary_class": "Material_loss",
+        "sub_type": "Spalling"
+      },
+      "bbox": [
+        183,
+        85,
+        57,
+        122
+      ]
+    },
+    {
+      "instance_id": "637_5",
+      "taxonomy": {
+        "primary_class": "Stain",
+        "sub_type": "Leakage stain"
+      },
+      "bbox": [
+        789.6746614583334,
+        490.15466145833335,
+        71.67999999999995,
+        436.9066666666667
+      ]
+    }
+  ]
+}

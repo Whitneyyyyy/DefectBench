@@ -1,0 +1,18 @@
+{
+  "image_path": "hk0602.jpg",
+  "bboxes": [
+    {
+      "instance_id": "hk0602_0",
+      "taxonomy": {
+        "primary_class": "Crack",
+        "sub_type": "Map cracking"
+      },
+      "bbox": [
+        1283.0,
+        391.0,
+        3340.0,
+        3080.0
+      ]
+    }
+  ]
+}

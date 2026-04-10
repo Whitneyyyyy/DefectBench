@@ -1,0 +1,44 @@
+{
+  "image_path": "212.png",
+  "bboxes": [
+    {
+      "instance_id": "s2ds_train_212_Corrosion_0",
+      "taxonomy": {
+        "primary_class": "Stain",
+        "sub_type": "Corrosion"
+      },
+      "bbox": [
+        439,
+        444,
+        76,
+        34
+      ]
+    },
+    {
+      "instance_id": "s2ds_train_212_Spalling_0",
+      "taxonomy": {
+        "primary_class": "Material_loss",
+        "sub_type": "Spalling"
+      },
+      "bbox": [
+        52,
+        341,
+        646,
+        269
+      ]
+    },
+    {
+      "instance_id": "s2ds_train_212_Efflorescence_0",
+      "taxonomy": {
+        "primary_class": "Stain",
+        "sub_type": "Leakage stain"
+      },
+      "bbox": [
+        355,
+        563,
+        93,
+        461
+      ]
+    }
+  ]
+}

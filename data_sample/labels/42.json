@@ -1,0 +1,18 @@
+{
+  "image_path": "istockphoto-952950912-612x612_jpg.rf.6f7e9fe4e5fcc36a22515b8454ceff4c.jpg",
+  "bboxes": [
+    {
+      "instance_id": "istockphoto-952950912-612x612_jpg.rf.6f7e9fe4e5fcc36a22515b8454ceff4c_0",
+      "taxonomy": {
+        "primary_class": "Stain",
+        "sub_type": "Leakage stain"
+      },
+      "bbox": [
+        1.0,
+        150.0,
+        414.5,
+        265.0
+      ]
+    }
+  ]
+}

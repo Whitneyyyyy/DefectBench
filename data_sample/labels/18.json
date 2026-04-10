@@ -1,0 +1,31 @@
+{
+  "image_path": "hk1847.jpg",
+  "bboxes": [
+    {
+      "instance_id": "hk1847_0",
+      "taxonomy": {
+        "primary_class": "Material_loss",
+        "sub_type": "Peeling"
+      },
+      "bbox": [
+        1492.0000000000002,
+        1179.0,
+        372.0,
+        685.0
+      ]
+    },
+    {
+      "instance_id": "hk1847_1",
+      "taxonomy": {
+        "primary_class": "Crack",
+        "sub_type": "Linear crack"
+      },
+      "bbox": [
+        1587.0,
+        717.0,
+        62.0,
+        513.0
+      ]
+    }
+  ]
+}

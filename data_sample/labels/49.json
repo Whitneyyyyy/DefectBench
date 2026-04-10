@@ -1,0 +1,44 @@
+{
+  "image_path": "sp_000208.jpg",
+  "bboxes": [
+    {
+      "instance_id": "DJI_20230802073129_0192_V_7_0",
+      "taxonomy": {
+        "primary_class": "External Fixings",
+        "sub_type": "Vegetation growth"
+      },
+      "bbox": [
+        45.0,
+        134.0,
+        60.0,
+        98.00000000000001
+      ]
+    },
+    {
+      "instance_id": "DJI_20230802073129_0192_V_7_1",
+      "taxonomy": {
+        "primary_class": "External Fixings",
+        "sub_type": "Vegetation growth"
+      },
+      "bbox": [
+        0.0,
+        0.0,
+        26.0,
+        45.0
+      ]
+    },
+    {
+      "instance_id": "DJI_20230802073129_0192_V_7_2",
+      "taxonomy": {
+        "primary_class": "External Fixings",
+        "sub_type": "Vegetation growth"
+      },
+      "bbox": [
+        105.0,
+        314.0,
+        45.0,
+        52.0
+      ]
+    }
+  ]
+}

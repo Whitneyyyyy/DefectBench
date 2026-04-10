@@ -1,0 +1,57 @@
+{
+  "image_path": "hk2560.jpg",
+  "bboxes": [
+    {
+      "instance_id": "hk2560_2",
+      "taxonomy": {
+        "primary_class": "Crack",
+        "sub_type": "Linear crack"
+      },
+      "bbox": [
+        3290.0,
+        443.0,
+        333.0,
+        1818.0
+      ]
+    },
+    {
+      "instance_id": "cubit-det_train2017_hk2560_1",
+      "taxonomy": {
+        "primary_class": "Crack",
+        "sub_type": "Linear crack"
+      },
+      "bbox": [
+        3533.0,
+        2253.0,
+        359.0,
+        1041.0
+      ]
+    },
+    {
+      "instance_id": "hk2560_4",
+      "taxonomy": {
+        "primary_class": "Crack",
+        "sub_type": "Linear crack"
+      },
+      "bbox": [
+        3164.0,
+        889.0,
+        74.0,
+        267.0
+      ]
+    },
+    {
+      "instance_id": "hk2560_5",
+      "taxonomy": {
+        "primary_class": "Material_loss",
+        "sub_type": "Spalling"
+      },
+      "bbox": [
+        3051.0,
+        1089.0,
+        287.0,
+        1149.0
+      ]
+    }
+  ]
+}

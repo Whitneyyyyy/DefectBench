@@ -1,0 +1,96 @@
+{
+  "image_path": "sp_000147.jpg",
+  "bboxes": [
+    {
+      "instance_id": "DJI_20230802073149_0212_V_16_0",
+      "taxonomy": {
+        "primary_class": "Material_loss",
+        "sub_type": "Spalling"
+      },
+      "bbox": [
+        0.0,
+        904.0,
+        154.0,
+        131.0
+      ]
+    },
+    {
+      "instance_id": "DJI_20230802073149_0212_V_16_1",
+      "taxonomy": {
+        "primary_class": "Material_loss",
+        "sub_type": "Spalling"
+      },
+      "bbox": [
+        91.0,
+        1.0,
+        138.0,
+        211.0
+      ]
+    },
+    {
+      "instance_id": "DJI_20230802073149_0212_V_16_2",
+      "taxonomy": {
+        "primary_class": "Material_loss",
+        "sub_type": "Spalling"
+      },
+      "bbox": [
+        602.0,
+        351.0,
+        202.00000000000003,
+        262.0
+      ]
+    },
+    {
+      "instance_id": "DJI_20230802073149_0212_V_16_3",
+      "taxonomy": {
+        "primary_class": "Stain",
+        "sub_type": "Rust stain"
+      },
+      "bbox": [
+        190.0,
+        0.0,
+        66.0,
+        293.0
+      ]
+    },
+    {
+      "instance_id": "DJI_20230802073149_0212_V_16_4",
+      "taxonomy": {
+        "primary_class": "Crack",
+        "sub_type": "Linear crack"
+      },
+      "bbox": [
+        230.81091362780808,
+        320.0388160404433,
+        282.90725000599116,
+        208.73034908978616
+      ]
+    },
+    {
+      "instance_id": "DJI_20230802073149_0212_V_16_5",
+      "taxonomy": {
+        "primary_class": "Crack",
+        "sub_type": "Linear crack"
+      },
+      "bbox": [
+        377.43967125286446,
+        0.9056376800263692,
+        112.12787347798434,
+        93.15238719709467
+      ]
+    },
+    {
+      "instance_id": "DJI_20230802073149_0212_V_16_6",
+      "taxonomy": {
+        "primary_class": "Crack",
+        "sub_type": "Linear crack"
+      },
+      "bbox": [
+        275.6620630190018,
+        102.68324591388907,
+        265.65680793245514,
+        205.280260675079
+      ]
+    }
+  ]
+}
